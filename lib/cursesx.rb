@@ -1,7 +1,7 @@
 require "curses"
 
 module CursesX
-  VERSION = "001"
+  VERSION = "002"
 end
 
 module Curses
@@ -56,7 +56,7 @@ module Curses
 
     alias :subwin_orig :subwin
     def subwin(height, width, y, x)
-      @children || = []
+      @children ||= []
       @children << subwin_orig(height, width, y, x)
       return @children.last
     end
