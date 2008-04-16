@@ -1,0 +1,6 @@
+.gemified
+History.txt
+License.txt
+README.txt
+Rakefile
+lib/cursesx.rb
