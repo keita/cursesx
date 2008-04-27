@@ -72,11 +72,30 @@ module Curses
       return win
     end
 
+    alias :standout_orig :standout
+    alias :standend_orig :standend
+
     # Standout within the block.
-    def standout; ::Curses.standout; end
+    def standout
+      if block_given?
+        standout_orig
+        yield
+        standend_orig
+      else
+        standout_orig
+      end
+    end
 
     # Standend within the block.
-    def standend; ::Curses.standend; end
+    def standend
+      if block_given?
+        standend_orig
+        yield
+        standout_orig
+      else
+        standend_orig
+      end
+    end
 
     # Draw the window.
     def draw; warning "Not implemented"; end
