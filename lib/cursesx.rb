@@ -35,6 +35,8 @@ module Curses
   alias :echo_orig :echo
   alias :noecho_orig :noecho
 
+  module_function :echo_orig, :noecho_orig
+
   # Echo within the block.
   def echo
     if block_given?
@@ -126,6 +128,28 @@ module Curses
         standout_orig
       else
         standend_orig
+      end
+    end
+
+    # Echo within the block.
+    def echo
+      if block_given?
+        Curses.echo
+        yield
+        Curses.noecho
+      else
+        Curses.echo
+      end
+    end
+
+    # Noecho within the block.
+    def noecho
+      if block_given?
+        Curses.noecho
+        yield
+        Curses.echo
+      else
+        Curses.noecho
       end
     end
 
