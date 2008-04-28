@@ -41,8 +41,9 @@ module Curses
   def echo
     if block_given?
       echo_orig
-      yield
+      res = yield
       noecho_orig
+      return res
     else
       echo_orig
     end
@@ -52,8 +53,9 @@ module Curses
   def noecho
     if block_given?
       noecho_orig
-      yield
+      res = yield
       echo_orig
+      return res
     else
       noecho_orig
     end
@@ -135,8 +137,9 @@ module Curses
     def echo
       if block_given?
         Curses.echo
-        yield
+        res = yield
         Curses.noecho
+        return res
       else
         Curses.echo
       end
@@ -146,8 +149,9 @@ module Curses
     def noecho
       if block_given?
         Curses.noecho
-        yield
+        res = yield
         Curses.echo
+        return res
       else
         Curses.noecho
       end
