@@ -102,8 +102,8 @@ module Curses
     def subwin(height, width, y, x, mod = nil)
       @__children__ ||= []
       win = subwin_orig(height, width, y, x)
-      win.extend mod if mod
       win.parent = self
+      win.extend mod if mod
       @__children__ << win
       return win
     end
