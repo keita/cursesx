@@ -5,6 +5,8 @@ module CursesX
 end
 
 module Curses
+  module_function
+
   alias :standout_orig :standout
   alias :standend_orig :standend
 
@@ -55,6 +57,36 @@ module Curses
     end
   end
 
+  def define_color(name, fg, bg)
+    @@color ||= Hash.new
+    val = @@color.values.sort.last || 0
+    @@color[name] = val + 1
+    fg = color_of(fg) if fg.kind_of?(Symbol)
+    bg = color_of(bg) if bg.kind_of?(Symbol)
+    init_pair(@@color[name], fg, bg)
+  end
+
+  def color(name)
+    color_pair(@@color[name])
+  end
+
+  # Symbol to color.
+  def color_of(name)
+    case name
+    when :black; COLOR_BLACK
+    when :red; COLOR_RED
+    when :green; COLOR_GREEN
+    when :yellow; COLOR_YELLOW
+    when :blue; COLOR_BLUE
+    when :magenta; COLOR_MAGENTA
+    when :cyan; COLOR_CYAN
+    when :white; COLOR_WHITE
+    else raise ArgumentError, name
+    end
+  end
+
+  private :color_of
+
   class Window
     attr_reader :__children__
     attr_accessor :__parent__
@@ -99,5 +131,7 @@ module Curses
 
     # Draw the window.
     def draw; warning "Not implemented"; end
+
+    def color(name); Curses.color(name); end
   end
 end
