@@ -1,9 +1,0 @@
---- 
-:summary: cursesx is an useful extension of standard curses.rb.
-:email: keita.yamaguchi@gmail.com
-:has_rdoc: true
-:name: cursesx
-:homepage: http://rubyforge.org/projects/cursesx/
-:version: "001"
-:rubyforge_project: cursesx
-:author: Keita Yamaguchi
